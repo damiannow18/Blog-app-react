@@ -9,7 +9,7 @@ import { signOut } from 'firebase/auth';
 import { auth } from './firebase-config';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
 
   const signOutUser = () => {
     signOut(auth).then(() => {
@@ -27,7 +27,7 @@ function App() {
       {!isLoggedIn ? <Link to="/login">Login</Link> : <button onClick={signOutUser}>Log out</button> }
     </nav>
       <Routes>
-        <Route path="/" element={<Home/>} />
+        <Route path="/" element={<Home isLoggedIn={isLoggedIn}/>} />
         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>} />
         <Route path="/create-post" element={<CreatePost isLoggedIn={isLoggedIn}/>} />
         <Route path="/info" element={<Info/>} />
