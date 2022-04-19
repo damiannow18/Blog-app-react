@@ -7,6 +7,7 @@ import Info from './pages/Info';
 import { useState } from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from './firebase-config';
+import useHistory from 'react-router-dom';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('isLoggedIn'));
@@ -18,14 +19,21 @@ function App() {
       window.location.pathname = "/login";
     })
   }
+
   return (
   <Router>
+    <header>
+    <div className="container">
     <nav>
-      <Link to="/">Home</Link>
-      {isLoggedIn && <Link to="/create-post">Create Post</Link>}
-      <Link to="/info">Info</Link>
-      {!isLoggedIn ? <Link to="/login">Login</Link> : <button onClick={signOutUser}>Log out</button> }
+      <ul>
+      <li><Link to="/">Home</Link></li>
+      {isLoggedIn && <li><Link to="/create-post">Create Post</Link></li>}
+      <li><Link to="/info">Info</Link></li>
+      {!isLoggedIn ? <li><Link to="/login">Login</Link></li> : <li><button className='logoutBtn' onClick={signOutUser}><span></span>Log out</button></li> }
+      </ul>
     </nav>
+    </div>
+    </header>
       <Routes>
         <Route path="/" element={<Home isLoggedIn={isLoggedIn}/>} />
         <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>} />

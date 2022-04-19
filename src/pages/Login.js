@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { auth, provider } from '../firebase-config';
 import { signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +16,7 @@ function Login({setIsLoggedIn}) {
   };
     return (
     <div className='loginPage'>
+      <div className='loginContainer'>
       <p>Sign in to continue</p>
       <button 
         className='login-with-google-btn' 
@@ -24,6 +25,7 @@ function Login({setIsLoggedIn}) {
         Sign in with Google
       </button>
       </div>
+    </div>
     );
 }
 
